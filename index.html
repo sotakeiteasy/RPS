@@ -4,11 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+</head>
+<body>
+    <div>
+        <button id='btnRock'>Rock</button>
+        <button id='btnPaper'>Paper</button>
+        <button id='btnScissors'>Scissors</button>
+      </div>
+      
+      <div id = 'container'> </div>
+
+</body>
+    
     <script>
+
+        let selectedChoice = '';
+        const btnRock = document.querySelector('#btnRock');
+        const btnPaper = document.querySelector('#btnPaper');
+        const btnScissors = document.querySelector('#btnScissors');
+        const container = document.querySelector("#container");
+
+
         let humanScore = 0;
         let computerScore = 0;
-        let counter = 1;
-        const limit = 5;
 
         // function randomly returns one of three values: rock, paper or scissors
         function getComputerChoice(){
@@ -22,58 +41,80 @@
             }
         }
 
-        // function get the choice of one of three variants from user
-        function getHumanChoice(){
-            choice = prompt("Write your variant");
-            return choice
-        }
+        btnRock.addEventListener('click', function() {
+            const humanChoice = 'rock';
+            console.log('Selected choice:', humanChoice);
+            const computerChoice = getComputerChoice();
+            playRound(humanChoice,computerChoice)
+        });
 
+        btnPaper.addEventListener('click', function() {
+            const humanChoice = 'paper';
+            console.log('Selected choice:', humanChoice);
+            const computerChoice = getComputerChoice();
+            playRound(humanChoice,computerChoice)
+        });
+
+        btnScissors.addEventListener('click', function() {
+            const humanChoice = 'scissors';
+            console.log('Selected choice:', humanChoice);
+            const computerChoice = getComputerChoice();
+            playRound(humanChoice,computerChoice)
+        });
+
+        
         function playRound(humanChoice, computerChoice){
             humanChoice = humanChoice.toLowerCase();
-            console.log(humanChoice)
+            let outcomeText = '';
             if (humanChoice === 'rock' && computerChoice === 'paper'
             || humanChoice === 'paper' && computerChoice === 'scissors'
             || humanChoice === 'scissors' && computerChoice === 'rock'){
                 computerScore++;
-                console.log("You loose " + computerChoice + " beats " + humanChoice)
-                console.log(`Your Score: ${humanScore}, Comp Score: ${computerScore}`)
+
+                outcomeText = `You loose, ${computerChoice} beats ${humanChoice}.`;
+
             } else if (humanChoice === 'rock' && computerChoice === 'scissors'
             || humanChoice === 'paper' && computerChoice === 'rock'
             || humanChoice === 'scissors' && computerChoice === 'paper'){
                 humanScore++;
-                console.log("You win " + humanChoice + " beats " + computerChoice)
-                console.log(`Your Score: ${humanScore}, Comp Score: ${computerScore}`)
+                outcomeText = `You win, ${computerChoice} beats ${humanChoice}.`;                
+                
             } else if (humanChoice === computerChoice){
-                console.log(`${humanChoice} "is the same as" ${computerChoice}`)
+                outcomeText =`${humanChoice} is the same as ${computerChoice}`
             }        
-            counter++
-        }
 
-        function playGame(){
-            while (counter <= limit){
-                const humanChoice = getHumanChoice();
-                const computerChoice = getComputerChoice();
-                playRound(humanChoice, computerChoice);
+            const outcomePara = document.createElement("p");
+            outcomePara.textContent = outcomeText;
+            container.appendChild(outcomePara);
 
-            if(humanScore > computerScore){
-                console.log("You win!");
-            } else {
-                console.log("You loose!");
+            const scorePara = document.createElement("p");
+            scorePara.textContent = `Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            container.appendChild(scorePara);
+
+            // Check if either player has reached a score of 5
+            if (humanScore === 5) {
+                const winPara = document.createElement("p");
+                winPara.textContent = "Congratulations! You win the game!";
+                container.appendChild(winPara);
+
+            } else if (computerScore === 5) {
+                const loosePara = document.createElement("p");
+                loosePara.textContent = "Sorry, you lost the game. Better luck next time!";
+                container.appendChild(loosePara);
             }
-            }
         }
+        // function playGame(){
+        //         const humanChoice = getHumanChoice();
+                
 
-        playGame()
-
-        
-
-
-        
-
-
+        //     if(humanScore > computerScore){
+        //         console.log("You win!");
+        //     } else {
+        //         console.log("You loose!");
+        //     }
+        // }
+        // playGame()
     </script>
-</head>
-<body>
-
 </body>
 </html>
+
