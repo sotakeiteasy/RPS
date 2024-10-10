@@ -29,7 +29,6 @@
         let humanScore = 0;
         let computerScore = 0;
 
-        // function randomly returns one of three values: rock, paper or scissors
         function getComputerChoice(){
             randomNumber = Math.random()
             if (randomNumber <= 0.33){
@@ -43,21 +42,18 @@
 
         btnRock.addEventListener('click', function() {
             const humanChoice = 'rock';
-            console.log('Selected choice:', humanChoice);
             const computerChoice = getComputerChoice();
             playRound(humanChoice,computerChoice)
         });
 
         btnPaper.addEventListener('click', function() {
             const humanChoice = 'paper';
-            console.log('Selected choice:', humanChoice);
             const computerChoice = getComputerChoice();
             playRound(humanChoice,computerChoice)
         });
 
         btnScissors.addEventListener('click', function() {
             const humanChoice = 'scissors';
-            console.log('Selected choice:', humanChoice);
             const computerChoice = getComputerChoice();
             playRound(humanChoice,computerChoice)
         });
@@ -91,7 +87,6 @@
             scorePara.textContent = `Your Score: ${humanScore}, Computer Score: ${computerScore}`;
             container.appendChild(scorePara);
 
-            // Check if either player has reached a score of 5
             if (humanScore === 5) {
                 const winPara = document.createElement("p");
                 winPara.textContent = "Congratulations! You win the game!";
@@ -103,17 +98,6 @@
                 container.appendChild(loosePara);
             }
         }
-        // function playGame(){
-        //         const humanChoice = getHumanChoice();
-                
-
-        //     if(humanScore > computerScore){
-        //         console.log("You win!");
-        //     } else {
-        //         console.log("You loose!");
-        //     }
-        // }
-        // playGame()
     </script>
 </body>
 </html>
